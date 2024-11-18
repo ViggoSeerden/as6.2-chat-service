@@ -4,18 +4,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace ChatService.Controllers;
 
 [ApiController]
-[Route("chats")]
+[Route("api/skeleton")]
 public class SkeletonController : ControllerBase
 {
     private MessageProducer _sender = new();
     
-    [HttpGet("skeleton")]
+    [HttpGet("")]
     public string GetSkeletonMessage()
     {
         return "This is the Chat Service Skeleton endpoint.";
     }
     
-    [HttpGet("skeleton/payment")]
+    [HttpGet("payment")]
     public string? SendSkeletonPayment()
     {
         _sender.SendMessage();
