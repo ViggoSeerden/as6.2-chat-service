@@ -29,7 +29,7 @@ namespace ChatIntegrationTests
         [TestMethod]
         public async Task GetSkeleton()
         {
-            var response = await _client.GetAsync("/chats/skeleton");
+            var response = await _client.GetAsync("/api/skeleton");
             var value = await response.Content.ReadAsStringAsync();
 
             response.EnsureSuccessStatusCode();
