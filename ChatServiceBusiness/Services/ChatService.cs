@@ -10,6 +10,6 @@ public class ChatService(IChatRepository chatRepository)
     public Task<List<Chat>> GetAllChatsAsync() => _chatRepository.GetAllAsync();
     public Task<Chat> GetChatByIdAsync(Guid id) => _chatRepository.GetByIdAsync(id);
     public Task AddChatAsync(Chat chat) => _chatRepository.AddAsync(chat);
-    public Task UpdateChatAsync(Chat chat) => _chatRepository.UpdateAsync(chat);
+    public Task UpdateChatAsync(Guid id, Chat chat) => _chatRepository.UpdateAsync(id, chat);
     public Task DeleteChatAsync(Guid id) => _chatRepository.DeleteAsync(id);
 }
