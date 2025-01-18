@@ -21,21 +21,27 @@ public class MessageRepository() : IMessageRepository
     
     public Task<Message> GetByIdAsync(Guid id)
     {
-        return null;
+        var filter = Builders<Message>.Filter.Eq(message => message.Id, id);
+        return _messageCollection.Find(filter).FirstOrDefaultAsync();
     }
 
-    public Task AddAsync(Message msg)
+    public Task AddAsync(Message message)
     {
-        return null;
+        return _messageCollection.InsertOneAsync(message);
     }
 
-    public Task UpdateAsync(Message msg)
+    public Task UpdateAsync(Guid id, Message updatedMessage)
     {
-        return null;
+        var filter = Builders<Message>.Filter.Eq(message => message.Id, id);
+        var update = Builders<Message>.Update
+            .Set(message => message.Content, updatedMessage.Content);
+        
+        return _messageCollection.UpdateOneAsync(filter, update);
     }
 
     public Task DeleteAsync(Guid id)
     {
-        return null;
+        var filter = Builders<Message>.Filter.Eq(message => message.Id, id);
+        return _messageCollection.DeleteOneAsync(filter);
     }
 }
