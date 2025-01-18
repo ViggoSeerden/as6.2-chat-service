@@ -21,21 +21,26 @@ public class ChatRepository() : IChatRepository
     
     public Task<Chat> GetByIdAsync(Guid id)
     {
-        return null;
+        var filter = Builders<Chat>.Filter.Eq(chat => chat.Id, id);
+        return _chatCollection.Find(filter).FirstOrDefaultAsync();
     }
 
     public Task AddAsync(Chat chat)
     {
-        return null;
+        return _chatCollection.InsertOneAsync(chat);
     }
 
-    public Task UpdateAsync(Chat chat)
+    public Task UpdateAsync(Guid id, Chat updatedChat)
     {
-        return null;
+        var filter = Builders<Chat>.Filter.Eq(chat => chat.Id, id);
+        var update = Builders<Chat>.Update
+            .Set(chat => chat.Status, updatedChat.Status);
+        
+        return _chatCollection.UpdateOneAsync(filter, update);
     }
-
     public Task DeleteAsync(Guid id)
     {
-        return null;
+        var filter = Builders<Chat>.Filter.Eq(chat => chat.Id, id);
+        return _chatCollection.DeleteOneAsync(filter);
     }
 }
